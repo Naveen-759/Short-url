@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 
 const { checkForAuthentication } = require("./middleware/auth");
 
+const dotenv = require("dotenv").config();
+
 const URL = require("./models/url");
 
 const urlRoute = require("./routes/url");
@@ -14,9 +16,9 @@ const userRoute = require("./routes/user");
 const app = express();
 const PORT = 8001;
 const path = require("path");
-connectToMongooDB(
-  "mongodb+srv://Naveen:Navi_123@naveen.mizgu7k.mongodb.net/short-url?retryWrites=true&w=majority&appName=Naveen"
-).then(() => console.log("Connected to mongodb!!"));
+connectToMongooDB(process.env.MONGOO_URL).then(() =>
+  console.log("Connected to mongodb!!")
+);
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
